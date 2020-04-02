@@ -11,7 +11,7 @@ import {
 	ScrollView,
 	Animated
 } from "react-native";
-import {Container, Content, Icon, Header, Left, Button, Body, Title, Right, Textarea} from 'native-base'
+import {Container, Content, Icon, Header, Left, Button, Body, Title, Right, Textarea, Toast} from 'native-base'
 import styles from '../../assets/style'
 import i18n from '../../locale/i18n'
 import {DoubleBounce} from "react-native-loader";
@@ -45,7 +45,11 @@ class Product extends Component {
 	}
 
 	componentWillMount() {
-		this.props.productDetails(this.props.lang, this.props.navigation.state.params.id, this.props.user.token);
+
+		const token = this.props.user ? this.props.user.token : null;
+
+		this.props.productDetails(this.props.lang, this.props.navigation.state.params.id, token);
+
 	}
 
 
@@ -68,12 +72,28 @@ class Product extends Component {
 	}
 
 	addToCart(id) {
-		this.setState({ isSubmitted: true });
-		const token = this.props.user ? this.props.user.token : null;
-		this.props.addCart(this.props.lang, id, token, this.state.value , this.props);
+
+		const token =  this.props.user ?  this.props.user.token : null;
+
+		if(token != null){
+			this.setState({ isSubmitted: true });
+			this.props.addCart(this.props.lang, id, token, this.state.value , this.props);
+		}else {
+			Toast.show({
+				text: i18n.t('chickLogin'),
+				type: "danger",
+				duration: 3000,
+				textStyle: {
+					color: "white",
+					fontFamily: 'cairo',
+					textAlign: 'center',
+				}
+			});
+		}
 	}
 
 	componentWillReceiveProps(nextProps) {
+
 		this.setState({isSubmitted: false});
 
 	}
@@ -150,9 +170,24 @@ class Product extends Component {
 	}
 
 	toggleFavorite(id) {
-		this.setState({isFav: !this.state.isFav});
-		const token = this.props.user ? this.props.user.token : null;
-		this.props.favorite(this.props.lang, id, token);
+
+		const token =  this.props.user ?  this.props.user.token : null;
+
+		if(token != null){
+			this.setState({isFav: !this.state.isFav});
+			this.props.favorite(this.props.lang, id, token);
+		}else {
+			Toast.show({
+				text: i18n.t('chickLogin'),
+				type: "danger",
+				duration: 3000,
+				textStyle: {
+					color: "white",
+					fontFamily: 'cairo',
+					textAlign: 'center',
+				}
+			});
+		}
 	}
 
 	editProdect() {

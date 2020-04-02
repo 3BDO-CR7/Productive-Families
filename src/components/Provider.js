@@ -28,12 +28,19 @@ class Provider extends Component {
     }
 
     componentWillMount() {
-        this.props.providerProduct( this.props.lang , this.props.navigation.state.params.id, this.props.user.token , null);
+
+        const token = this.props.user ? this.props.user.token : null;
+
+        this.props.providerProduct( this.props.lang , this.props.navigation.state.params.id, token , null);
+
     }
 
     onSubCategories ( id ){
         this.setState({spinner: true, active : id });
-        this.props.providerProduct( this.props.lang , this.props.navigation.state.params.id, this.props.user.token ,id);
+
+        const token = this.props.user ? this.props.user.token : null;
+
+        this.props.providerProduct( this.props.lang , this.props.navigation.state.params.id, token ,id);
     }
 
     // renderLoader(){

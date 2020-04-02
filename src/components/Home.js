@@ -34,22 +34,30 @@ class Home extends Component {
 
     componentWillMount() {
 
-        if ( this.props.auth === null || this.props.auth.key === 0 ) {
-            this.props.navigation.navigate('Login');
-        }
-        else if (this.props.auth.data.type === 'user') {
+        console.log('userType', this.props.navigation.state.params.userType)
+
+
+        if(this.props.navigation.state.params.userType !== 'visitor'){
+            if ( this.props.auth === null || this.props.auth.key === 0 ) {
+                this.props.navigation.navigate('Login');
+            }
+            else if (this.props.auth.data.type === 'user') {
+                this.props.sliderHome(this.props.lang);
+                this.props.categoryHome(this.props.lang);
+            }
+            else if (this.props.auth.data.type === 'provider') {
+                this.props.homeProvider(this.props.lang, null, this.props.auth.data.token);
+            }
+            else if (this.props.auth.data.type === 'delegate') {
+                this.props.homeDelegate(this.props.lang, this.state.status, this.props.auth.data.token);
+            }
+
+            if(this.props.auth !== null){
+                this.props.profile(this.props.auth.data.token);
+            }
+        }else {
             this.props.sliderHome(this.props.lang);
             this.props.categoryHome(this.props.lang);
-        }
-        else if (this.props.auth.data.type === 'provider') {
-            this.props.homeProvider(this.props.lang, null, this.props.auth.data.token);
-        }
-        else if (this.props.auth.data.type === 'delegate') {
-            this.props.homeDelegate(this.props.lang, this.state.status, this.props.auth.data.token);
-        }
-
-        if(this.props.auth !== null){
-            this.props.profile(this.props.auth.data.token);
         }
 
         this.setState({ spinner: false });

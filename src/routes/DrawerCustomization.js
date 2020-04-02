@@ -47,9 +47,11 @@ class DrawerCustomization extends Component {
         let { user } = this.props;
         if ( user == null )
             user = {
-                avatar      : '../../assets/images/img_five.png',
+                avatar      : 'https://i.stack.imgur.com/SE2cv.jpg',
                 name        : i18n.t('guest'),
             };
+
+        console.log('aner', user)
 
         return (
             <Container>
