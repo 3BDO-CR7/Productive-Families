@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="WebServers">
+    <option name="servers">
+<<<<<<< HEAD
+      <webServer id="ba3a8e66-5c5c-4f65-82d2-75546b49462f" name="reesh" url="http://reesh1.com">
+        <fileTransfer host="reesh1.com" port="21" rootFolder="/public_html/backend">
+=======
+      <webServer id="8897e5a1-a252-4f9d-8943-dbf1aa6c930b" name="chifz" url="http://chifz.aait-sa.com">
+        <fileTransfer host="chifz.aait-sa.com" port="21" rootFolder="/public_html">
+>>>>>>> 47bf97d017ca214dc2e9e9e3153fdd0be2fa536e
+          <advancedOptions>
+            <advancedOptions dataProtectionLevel="Private" passiveMode="true" shareSSLContext="true" />
+          </advancedOptions>
+          <option name="port" value="21" />
+        </fileTransfer>
+      </webServer>
+    </option>
+  </component>
+</project>
